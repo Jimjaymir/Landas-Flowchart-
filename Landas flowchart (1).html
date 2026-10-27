@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Landas flowchart</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{--bg:#F5F0E6;--cd:#FFFDF8;--ink:#13261E;--mut:#5E6B62;--g2:#1D7A52;--sun:#FF8A3D;--gold:#FFB020;--ln:#E4DCCB;--tint:#EDE6D6;--cl:#13261e0e;--tb:#13261E;--tf:#FFB020;--sh:0 1px 0 #fff9 inset,0 14px 28px -20px #13261e90;--r:24px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1612;--cd:#12201A;--ink:#EFF5EE;--mut:#9DB0A4;--g2:#4FD08A;--ln:#243B30;--tint:#192C23;--cl:#ffffff0b;--tb:#4FD08A;--tf:#06140C;--sh:0 14px 30px -20px #000}}
+:root[data-theme="dark"]{--bg:#0B1612;--cd:#12201A;--ink:#EFF5EE;--mut:#9DB0A4;--g2:#4FD08A;--ln:#243B30;--tint:#192C23;--cl:#ffffff0b;--tb:#4FD08A;--tf:#06140C;--sh:0 14px 30px -20px #000}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.4 'Atkinson Hyperlegible','Trebuchet MS',sans-serif}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:repeating-radial-gradient(ellipse 70% 55% at 94% 3%,transparent 0 26px,var(--cl) 26px 27.5px),repeating-radial-gradient(ellipse 60% 50% at 2% 98%,transparent 0 26px,var(--cl) 26px 27.5px)}
+h1,h2{font-family:'Bricolage Grotesque','Trebuchet MS',sans-serif;letter-spacing:-.03em;line-height:1.05;margin:0}
+.ttl{font-size:clamp(2rem,9vw,3rem);font-weight:800;text-align:center;margin:18px 0 6px}
+.chart{max-width:860px;margin:0 auto;padding:16px 16px 120px;display:flex;flex-direction:column;align-items:center}
+.hero{width:100%;border-radius:28px;padding:28px 22px 40px;background:linear-gradient(150deg,#0F5A38,#082F20);color:#fff;position:relative;margin-bottom:18px}
+.hero::after{content:"";position:absolute;left:22px;right:22px;bottom:18px;height:4px;border-radius:9px;background:repeating-linear-gradient(90deg,var(--gold) 0 14px,transparent 14px 24px)}
+.hero h1{font-size:clamp(2.2rem,10vw,3.2rem);font-weight:800}.hero h1 em{font-style:normal;color:var(--sun)}
+.hero p{margin:8px 0 0;color:#CFE3D6;max-width:46ch}
+.kick{font:700 .76rem 'Atkinson Hyperlegible',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--g2)}
+.legend{display:flex;flex-wrap:wrap;gap:14px 18px;justify-content:center;align-items:center;margin:6px 0 10px;padding:14px;width:100%;background:var(--cd);border:1px solid var(--ln);border-radius:var(--r);box-shadow:var(--sh)}
+.legend div{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.78rem;color:var(--mut);font-weight:700}
+.legend .n{padding:6px 12px;font-size:.72rem}.legend .d{width:92px;min-height:54px}.legend .d span{width:100%;padding:0}.legend .tag{display:none}.legend .c{width:30px;height:30px;font-size:.8rem}
+.sec{width:100%;margin:34px 0 18px;padding:18px 20px;background:var(--cd);border:1px solid var(--ln);border-radius:var(--r);box-shadow:var(--sh);position:relative}
+.sec::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:6px;border-radius:0 6px 6px 0;background:var(--sun)}
+.sec h2{font-size:1.7rem;margin:4px 0}.sec p{margin:2px 0 0;color:var(--mut)}
+.n{position:relative;width:min(100%,380px);text-align:center;font-size:.95rem;line-height:1.35;padding:14px 18px}
+.t{border-radius:99px;background:var(--tb);color:var(--tf);font-weight:700;padding:15px 26px;box-shadow:var(--sh)}
+.p{background:var(--cd);border:2px solid var(--ln);border-top:5px solid var(--g2);border-radius:14px;box-shadow:var(--sh)}
+.p.br{border-top-color:var(--sun);font-size:.86rem;background:var(--tint)}
+.io{transform:skewX(-14deg);background:var(--tint);border:2px solid var(--g2);border-radius:6px;padding:14px 30px;box-shadow:var(--sh)}
+.io span{display:block;transform:skewX(14deg)}
+.d{width:min(100%,340px);min-height:170px;display:grid;place-items:center;background:var(--sun);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);position:relative;text-align:center;font-size:.84rem;font-weight:700;line-height:1.3}
+.d::before{content:"";position:absolute;inset:3px;background:var(--cd);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.d span{position:relative;z-index:1;width:56%;padding:26px 0}
+.tag{display:block;font:800 .62rem 'Atkinson Hyperlegible',sans-serif;letter-spacing:.14em;text-transform:uppercase;font-style:normal;color:var(--g2);margin-bottom:3px}.t .tag{color:var(--tf);opacity:.75}
+.cw{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.78rem;color:var(--mut);font-weight:700;max-width:110px;text-align:center}
+.c{width:44px;height:44px;border-radius:50%;background:var(--sun);color:#2A1300;font:800 1.05rem 'Bricolage Grotesque',sans-serif;display:grid;place-items:center;box-shadow:0 10px 18px -12px var(--sun);font-style:normal}
+.ar{position:relative;width:3px;height:32px;flex:none;background:repeating-linear-gradient(var(--g2) 0 6px,transparent 6px 10px)}
+.ar::after{content:"";position:absolute;bottom:-3px;left:50%;translate:-50% 0;border:7px solid transparent;border-top:9px solid var(--g2);border-bottom:0}
+.ar b,.h b{font:700 .72rem 'Atkinson Hyperlegible',sans-serif;background:var(--tint);border:1px solid var(--ln);padding:1px 9px;border-radius:99px;white-space:nowrap}
+.ar b{position:absolute;left:14px;top:50%;translate:0 -50%}
+.dec{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px) minmax(0,1fr);align-items:center;width:100%}
+.dec>.d{grid-column:2;justify-self:center}
+.side{grid-column:3;display:flex;align-items:center;min-width:0}
+.h{position:relative;width:34px;height:3px;flex:none;background:repeating-linear-gradient(90deg,var(--sun) 0 6px,transparent 6px 10px)}
+.h::after{content:"";position:absolute;right:-3px;top:50%;translate:0 -50%;border:7px solid transparent;border-left:9px solid var(--sun);border-right:0}
+.h b{position:absolute;left:50%;top:-24px;translate:-50% 0}
+.sb{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;flex:1}.sb .n{width:100%}
+.rj{font-size:.74rem;color:var(--mut);font-style:normal}
+.outs{display:flex;flex-wrap:wrap;gap:14px 16px;justify-content:center;padding:14px 8px 0;border-top:3px dotted var(--sun);margin-top:-2px;width:min(100%,560px)}
+.lanes{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;align-items:start}
+.lane{display:flex;flex-direction:column;align-items:center;border:2px dashed var(--ln);border-radius:var(--r);padding:14px 10px 18px;background:color-mix(in srgb,var(--cd) 55%,transparent);min-width:0}
+.lt{font:800 .95rem 'Bricolage Grotesque',sans-serif;background:var(--tb);color:var(--tf);padding:5px 16px;border-radius:99px;margin-bottom:14px}
+.dec.v{display:flex;flex-direction:column;align-items:center}
+.dec.v .side{flex-direction:column;align-self:flex-end;width:78%;margin-top:2px}
+.dec.v .h{width:3px;height:26px;background:repeating-linear-gradient(var(--sun) 0 6px,transparent 6px 10px)}
+.dec.v .h::after{right:auto;left:50%;top:auto;bottom:-3px;translate:-50% 0;border:7px solid transparent;border-top:9px solid var(--sun);border-bottom:0}
+.dec.v .h b{left:14px;top:50%;translate:0 -50%}
+@media(max-width:699px){
+.dec{display:flex;flex-direction:column;align-items:center}
+.side{flex-direction:column;align-self:flex-end;width:78%;margin-top:2px}
+.h{width:3px;height:26px;background:repeating-linear-gradient(var(--sun) 0 6px,transparent 6px 10px)}
+.h::after{right:auto;left:50%;top:auto;bottom:-3px;translate:-50% 0;border:7px solid transparent;border-top:9px solid var(--sun);border-bottom:0}
+.h b{left:14px;top:50%;translate:0 -50%}
+.lanes{grid-template-columns:1fr}}
+#nav{position:fixed;left:50%;translate:-50% 0;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:min(460px,calc(100% - 24px));display:flex;gap:2px;padding:6px;border-radius:26px;background:color-mix(in srgb,var(--cd) 92%,transparent);backdrop-filter:blur(14px);border:1px solid var(--ln);box-shadow:0 14px 34px -10px #0a3b2860;z-index:5}
+#nav a{flex:1;text-align:center;text-decoration:none;color:var(--ink);font-size:.74rem;font-weight:700;padding:14px 2px;border-radius:20px}
+#nav a:hover,#nav a:focus-visible{background:var(--tb);color:var(--tf);outline:none}
+</style>
+</head>
+<body>
+<main class="chart" id="chart"></main>
+<nav id="nav" aria-label="Jump to a part of the flowchart"><a href="#s1">Open</a><a href="#s2">Sign in</a><a href="#s3">Student</a><a href="#s4">Admin</a><a href="#s5">Server</a><a href="#s7">Console</a></nav>
+<script>
+const T=(x,g)=>['t',x,g],P=x=>['p',x],IN=x=>['i',x,'Input'],OUT=x=>['i',x,'Output'],C=(l,c)=>['c',l,c],
+D=(q,m,sl,st,sc)=>['d',q,m,sl,st,sc],H=(id,k,t,s)=>['h',k,t,id,s],
+DM=(q,o)=>['m',q,o],SP=(q,a,A,b,B)=>['s',q,a,A,b,B];
+
+const FLOW=[
+H('s1','Part 1','Opening the app','From the moment someone taps the icon until they land on a screen.'),
+T('Someone opens Landas on their phone','Start'),
+P('The browser loads the page, the styles and the scripts'),
+D('Has the service worker already saved the app files?','Yes','No','Fetch them over the network and keep a copy for next time'),
+P('Show the saved copy straight away and refresh it quietly. Calls to the server are always fetched fresh, so the app opens even offline'),
+P('Landas reads what is already saved on this device: accounts, reports and settings'),
+D('Is the C++ server running?','Yes','No','Carry on without it. Everything is kept on this device'),
+IN('Pull the latest map, reports, users and wet-floor zones from the server'),
+D('Is anyone already signed in here?','No','Yes','Skip sign-in and open their home screen','H'),
+
+H('s2','Part 2','Signing in or signing up','Two kinds of people use Landas, so the front door asks who they are.'),
+C('A','Sign-in screen'),
+OUT('Sign-in screen with two choices: Student / Visitor or Admin'),
+SP('Which one did they pick?','Student / Visitor',[
+ D('Is this their first time?','No','Yes','Open the sign-up form','S'),
+ IN('Type their name and password'),
+ D('Do the name and password match an account?','Yes','No','Show “Name or password is incorrect”','A'),
+ P('Sign them in and remember who they are on this device'),
+ C('H','To Home')
+],'Admin',[
+ IN('Type the admin name and password'),
+ D('Have they tried too many times? (10 in 5 minutes)','No','Yes','Ask them to wait a few minutes','A'),
+ D('Are the name and password correct?','Yes','No','Show “Wrong admin name or password”','A'),
+ P('The server checks the hashed password and hands out an admin token'),
+ C('O','To Admin')
+]),
+
+H('s2b','Part 2b','Creating a new account','Reached from the “first time” branch above.'),
+C('S','Sign-up'),
+IN('Fill in name, age, phone, family contact and access needs'),
+P('Pick a password (at least 6 characters) and type it twice'),
+D('Is everything valid and is the name still free?','Yes','No','Show exactly what needs fixing','S'),
+P('Create the account. The server stores the password salted and hashed'),
+P('Sign them in automatically'),
+C('H','To Home'),
+
+H('s3','Part 3','The student side','What a student or visitor can do once they are in.'),
+C('H','Home'),
+P('Apply comfort settings: bigger text, high contrast, calm mode and walking pace'),
+OUT('Home: a greeting for the time of day, the building they are near, announcements, active issues and saved places'),
+D('Did an admin update one of their reports?','No','Yes','Show an “Update on your report” card'),
+C('B','Tab bar'),
+DM('Which tab does the student tap?',[['H','Home'],['M','Map'],['R','Route'],['P','Places'],['X','Reports']]),
+
+H('s3a','Student tab','Map','See the campus and get warned before trouble spots.'),
+C('M','Map'),
+OUT('Campus map with buildings, paths, ramps and wet spots'),
+D('Is live tracking switched on?','Yes','No','Just tap buildings to explore'),
+P('Phone GPS finds the student and snaps them to the nearest building'),
+D('Are they close to a ramp, stairs, wet floor or hazard?','Yes','No','Keep quietly tracking'),
+OUT('Warn by voice, sound or buzz, with the distance and whether a wheelchair can use it'),
+D('Do they want to scan a Landas QR code?','No','Yes','The map jumps to that exact spot'),
+P('Tap a building on the map'),
+OUT('Building card with a photo, ramps, barriers and cautions'),
+D('Do they want to save it?','No','Yes','Add it to Saved places, shown on Home and Route'),
+C('B','Back to tab bar'),
+
+H('s3b','Student tab','Route','Find a way that actually works for the person walking it.'),
+C('R','Route'),
+IN('Pick a start and a destination, or tap a saved place'),
+P('Tick “Step-free paths only” if they need it'),
+D('Are both places chosen and different?','Yes','No','Ask them to choose again','R'),
+P('Adjust for their needs: wheelchair or leg difficulty forces step-free, blind or cane users count steps as 3 times longer'),
+D('Is the server reachable?','Yes','No','The phone runs the same shortest-path search itself'),
+P('The server runs Dijkstra’s shortest path (see “How the shortest path is found” in Part 5)'),
+P('Skip any path an admin closed or a Verified report says is blocked'),
+D('Did we find a route?','Yes','No','Say so, and suggest another place or unticking step-free','R'),
+OUT('Draw the route with distance, minutes at their pace and number of steps'),
+D('Do they want to start walking?','Yes','No','Stay on the preview','B'),
+C('W','Walk mode'),
+P('Walk mode starts: live GPS, or a simulated walk if GPS is off'),
+P('Beacon guides turn by turn with voice, sound pings or buzzes (see “Beacon guidance” below)'),
+D('Is the destination within 5 metres?','Yes','No','Keep guiding and update the distance left','W'),
+T('“You have arrived”','End'),
+C('B','Back to tab bar'),
+
+H('s3b2','Student, behind Route','Beacon guidance','Runs the whole time Walk mode is on.'),
+T('Walk mode is running','Start'),
+P('Before walking, check whether the route passes a wet-floor spot and warn if it does'),
+P('The student’s guide mode is Voice, Sound or Buzz and can be switched at any time'),
+C('G','Check direction'),
+P('Compare the way they are walking with the next point on the route'),
+D('Are they facing the right way?','Yes','No','Say or signal “Turn left”, “Turn right” or “Turn around”'),
+OUT('“Continue straight”, as speech, a ping tone or a vibration'),
+D('Are they within 5 metres of the destination?','No','Yes','Say “You have arrived” and stop guiding'),
+P('Wait a moment, then look at their position again'),
+C('G','Check again'),
+
+H('s3b3','Student, behind Map and Route','Sense alerts','How the phone warns about ramps, steps, wet floors and bumps.'),
+T('The phone’s position changes','Start'),
+P('Find the nearest map spot: ramp, stairs, wet floor, hazard, bump or rest spot'),
+D('Is it within their warning distance? (8, 12, 16 or 20 metres)','Yes','No','Do nothing yet'),
+D('Is a wet zone active at this spot?','No','Yes','Treat it as a wet-floor spot, even if it was drawn as something else'),
+P('Look at their settings for voice, sound, light and vibration'),
+D('Is calm mode or reduced motion on?','No','Yes','Skip the flashing light'),
+OUT('Flash a coloured light, play a tone, vibrate in Morse (R for ramp, S for stairs, W for wet) and say “Ramp ahead”'),
+T('The banner fades after about 7 seconds','End'),
+
+H('s3b4','Student, behind Home','Step counter and compass','Uses the phone’s motion sensors if the student allows them.'),
+T('Motion sensors switched on','Start'),
+IN('The accelerometer reports its readings many times a second'),
+D('Is the reading above the step threshold and a fresh peak?','Yes','No','Ignore it until the reading drops back to rest'),
+P('Count one step and add it to today’s total, saved every 10 steps'),
+IN('The compass reports the heading'),
+P('Compare the heading with where the map says to go: forward, diagonal, sideways or backward'),
+OUT('Home shows steps today, and guidance knows which way they face'),
+T('Keep listening until tracking is switched off','End'),
+
+H('s3c','Student tab','Reports','Students are the campus’s eyes. This is how they tell the admins.'),
+C('X','Reports'),
+IN('Report form: what happened, where, and a short note'),
+D('Is the form filled in properly?','Yes','No','Show what to fix','X'),
+D('Have they sent 5 reports in the last 10 minutes?','No','Yes','Ask them to wait a few minutes','B'),
+P('The server cleans the text and checks the place exists'),
+P('Save it as Pending, log it in the history and back up the data'),
+OUT('It appears under My reports and Community reports'),
+P('It now waits for an admin (see Review reports)'),
+C('B','Back to tab bar'),
+
+H('s3d','Shared tab','Places','Building cards with photos and an honest list of ramps, barriers and cautions.'),
+C('P','Places'),
+OUT('Building cards with photos and filter chips'),
+P('Open one building'),
+OUT('Read its ramps, barriers, cautions and notes'),
+D('Is this an admin?','No','Yes','Add, edit or delete notes. A note about a wet or slippery spot turns on the wet-floor warning','Z'),
+C('B','Back to tab bar'),
+
+H('s3h','Student shortcuts','Home tiles and the avatar','Some screens are not on the tab bar. Students reach them from Home tiles or the round avatar button.'),
+C('H','Home'),
+DM('Where do the Home tiles and avatar lead?',[['D','Zara Hall demo'],['P','Campus places'],['M','Campus map'],['X','Report a problem'],['Y','Need help?'],['E','Sense and profile']]),
+
+H('s3e','Student shortcut','Need help?','Safety net for someone who is stuck or worried.'),
+C('Y','Help'),
+OUT('Help screen: one tap to call the family contact, share my location, elevator status and “Before you go” tips'),
+D('Did they tap call or share?','No','Yes','Open the phone dialer, or share their location'),
+D('Is a Verified report open for an elevator?','No','Yes','Show “Out of service” next to that elevator'),
+OUT('Every other elevator shows “Working”'),
+C('B','Back to tab bar'),
+
+H('s3f','Student shortcut','Sense and profile','Settings so alerts match how each person moves. Opened with the avatar button.'),
+C('E','Profile'),
+OUT('Profile: name, age, phone, family contact, access needs, comfort settings, alert settings and saved places'),
+IN('Change the pace, warning distance, or voice, sound, light and vibration alerts'),
+D('Are they changing their details or password?','No','Yes','Check the inputs (valid age and phone, password 6+ characters, matching) and save “Profile saved”'),
+D('Do they want to sign out or delete the account?','No','Yes','Sign out, or delete after an “Are you sure?” prompt','Q'),
+C('B','Back to tab bar'),
+
+H('s3g','Student shortcut','Zara Hall demo','One tap to try the whole app on sample data.'),
+C('D','Zara demo'),
+P('Fill in Main Gate to the IT Lab, step-free, with Beacon switched on'),
+P('The route goes Main Gate, Zara Hall, Zara Entrance, the elevator, then IT Lab 2F'),
+OUT('Live alerts for the ramp, side-door steps, wet lobby floor, lab-door bump and bench (all sample data)'),
+D('Was the sample wet-floor entry removed?','No','Yes','The wet-floor warning switches off'),
+C('B','Back to tab bar'),
+
+H('s4','Part 4','The admin side','Everything an admin changes shows up for every student straight away.'),
+C('O','Overview'),
+OUT('Overview: active issue counts, the campus map and an announcement box'),
+D('Do they want to post an announcement?','No','Yes','Write up to 160 characters. It shows on every student’s Home'),
+D('Do they want to import or export backend files?','No','Yes','Open the Backend data card','F'),
+C('Z','Admin bar'),
+DM('Which admin tab do they tap?',[['O','Overview'],['V','Reviews'],['T','Paths'],['P','Places'],['U','Survey']]),
+
+H('s4a','Admin tab','Review reports','Turning a Pending report into something everyone can trust.'),
+C('V','Reviews'),
+OUT('Report list with chips: All, Pending, Verified, Resolved, Rejected'),
+P('Open a report and read the note and its history'),
+D('Does the server accept their admin token?','Yes','No','The server answers “Admins only” and they sign in again','A'),
+D('Is the problem real?','Yes','No','Mark it Rejected or leave it Pending'),
+P('Mark it Verified. It becomes an active issue and can block that path in routes'),
+D('Has it been fixed?','Yes','No','Leave it Verified until someone fixes it'),
+P('Mark it Resolved'),
+D('Did they click the wrong thing?','No','Yes','Undo or redo the status change or delete','N'),
+P('Every change is written to the history with the admin’s name and saved to reports.txt'),
+C('Z','Back to admin bar'),
+
+H('s4b','Admin tab','Paths','Closing a path for repairs without redrawing the map.'),
+C('T','Paths'),
+OUT('List of paths with their lengths and step-free flags'),
+D('Is a path unsafe or under repair?','Yes','No','Leave it open','Z'),
+P('Mark it closed. Every route now avoids it for everybody'),
+C('Z','Back to admin bar'),
+
+H('s4c','Admin tab','Survey','Teaching the map where things really are.'),
+C('U','Survey'),
+IN('Stand at a building entrance outdoors and fill in what you see'),
+P('The phone averages its GPS readings and saves the point'),
+D('Are there two or more saved points?','Yes','No','Keep surveying other entrances'),
+P('The map and arrival alerts now use real GPS'),
+C('Z','Back to admin bar'),
+
+H('s4d','Admin, from Review reports','Undo and redo','A safety net for wrong clicks on a status change or a delete.'),
+C('N','Undo or redo'),
+IN('Tap Undo or Redo'),
+D('Does the server accept their admin token?','Yes','No','Answer “Admins only” (401)'),
+D('Is there anything to undo or redo?','Yes','No','Say “There is nothing to undo.” or “…to redo.”'),
+D('Was that action a delete?','No','Yes','Put the report back at its old place in the list'),
+P('Set the status back to what it was before'),
+P('Move the step to the other list, so an undo can be redone'),
+P('Save reports.txt and log “Undo:” or “Redo:” with the admin’s name'),
+P('Only the last 50 steps are remembered, and any new action clears the redo list'),
+OUT('The reports list refreshes for everyone'),
+C('Z','Back to admin bar'),
+
+H('s4e','Admin, from Overview','Backend files','Moving map.txt and reports.txt between the app and the C++ backend.'),
+C('F','Backend data'),
+D('Are they importing?','Yes','No','Download map.txt or reports.txt to share with the C++ backend','Z'),
+IN('Choose map.txt and/or reports.txt'),
+D('Is the file readable? (LOCATIONS and PATHS present, no bad lines)','Yes','No','Show what is wrong, like “map.txt is missing the PATHS section”','F'),
+P('Replace the map and/or reports, clear closed paths and tidy saved places'),
+OUT('Show “Backend data loaded”'),
+C('Z','Back to admin bar'),
+
+H('s5','Part 5','Behind the scenes','What the C++ server does every time the app talks to it.'),
+IN('A request arrives (map, reports, route, login, zones and so on)'),
+P('Lock the shared data so two people never collide'),
+D('Is it a login or a report, and are they spamming?','No','Yes','Answer “Too many tries. Please wait”'),
+D('Does the request need an admin and is the token valid?','Yes','No','Answer “Admins only” (401)'),
+P('Clean and validate everything the user sent'),
+P('Read or write the data files: map, reports, users, history, patches'),
+P('Back up the data files, keeping the newest 10'),
+OUT('Send the answer back as JSON'),
+
+H('s5b','Part 5b','Wet-floor zones','How the server decides a spot is wet (the /api/zones request).'),
+T('Someone asks for the wet-floor zones','Start'),
+P('Start with an empty list of zones'),
+D('Did an admin mark any building as wet?','Yes','No','Move on to the next source'),
+P('Add that spot with the source “Admin mark”'),
+D('Does a Places note mention wet, slippery, puddle, spill or mop and is not marked ok or info?','Yes','No','Move on to the next source'),
+P('Add that building’s spot with the source “Places log”'),
+D('Is an open “inaccessible pathway” report mentioning one of those words?','Yes','No','Move on'),
+P('Add the spot at either end of that path with the source “Report”'),
+OUT('Send the list. Map spots flip to wet and alerts say “Wet floor ahead”'),
+T('If the list is empty, the wet-floor warning stays off','End'),
+
+H('s5c','Part 5c','How the shortest path is found','The route search inside router.cpp, step by step.'),
+T('findRoute gets a start, a goal, the step-free option and the profile','Start'),
+D('Are both places on the map?','Yes','No','Return “no route”'),
+D('Is the profile wheelchair or leg difficulty?','No','Yes','Force step-free only'),
+D('Is the profile blind or cane?','No','Yes','Make every stepped path cost 3 times its length'),
+P('Give every location the cost “far”, except the start, which costs 0'),
+C('J','Pick next'),
+P('Pick the closest location that is not finished yet'),
+D('Is there one, and can it be reached?','Yes','No','Stop: there is no way to get there'),
+P('Mark it finished'),
+D('Is it the destination?','No','Yes','Stop searching and rebuild the route','L'),
+P('Look at every path that touches it'),
+D('Is the path blocked? (an admin closed it, or a Verified report says so)','No','Yes','Skip this path'),
+D('Is the path stepped while step-free is on?','No','Yes','Skip this path'),
+D('Is the total cheaper than the best way known to the other end?','Yes','No','Keep the old cost'),
+P('Remember the cheaper cost and where we came from'),
+C('J','Back to pick next'),
+C('L','Rebuild'),
+P('Walk backwards from the goal using “where we came from”, then flip the list'),
+P('Add up the real metres and count the paths with steps'),
+OUT('Return the places in order, the distance and the number of stepped paths'),
+T('Route found','End'),
+
+H('s5d','Part 5d','Starting the server','What happens when someone runs landas.exe.'),
+T('Someone runs landas.exe','Start'),
+D('Can backend/data/map.txt be read?','Yes','No','Print “Could not read map.txt. Run landas.exe from the app folder.” and quit'),
+P('Load reports.txt and users.txt into memory'),
+D('Did they type --console?','No','Yes','Skip the web server and open the text menu','K'),
+D('Did they type a port number, like 3000?','No','Yes','Use that port instead of 8080'),
+P('Register every API route, one by one'),
+OUT('Print “Landas is running at http://localhost:8080”'),
+T('Keep listening. Each request takes its turn through the lock','End'),
+
+H('s6','Part 6','Signing out','Leaving cleanly so the next person starts fresh.'),
+C('Q','Sign out'),
+IN('A student taps Sign out in Profile, or an admin taps the avatar button'),
+P('Stop live tracking and the step counter'),
+P('Clear the session and hide the app'),
+OUT('The sign-in screen appears again'),
+C('A','Sign-in screen'),
+T('The next person can sign in','End'),
+H('s7','Part 7','Console mode','landas.exe --console: the same data as a plain text menu, no browser.'),
+C('K','Console'),
+OUT('Print the menu: 1 Locations, 2 Paths, 3 Reports, 4 Add a report, 5 Change a status, 6 Find a route, 0 Quit'),
+IN('Type a number (it asks again until it is a number)'),
+D('Did they type 0?','No','Yes','Print “Bye!” and end'),
+D('Is it a number from 1 to 6?','Yes','No','Print “Pick a number from the menu.”','K'),
+DM('Which number did they choose?',[['1','Locations'],['2','Paths'],['3','Reports'],['4','Add'],['5','Status'],['6','Route']]),
+
+H('s7a','Console choices','What each number does',''),
+C('1','Locations'),OUT('List every location with its number'),C('K','Back to menu'),
+C('2','Paths'),OUT('List every path with its length and whether it is step-free'),C('K','Back to menu'),
+C('3','Reports'),OUT('List every report, or “(none)”'),C('K','Back to menu'),
+C('4','Add'),IN('Choose the problem and place, then type your name and details'),
+D('Is the report valid and stored?','Yes','No','Print “Not saved:” and the reason'),
+OUT('Print “Report #n saved.”'),C('K','Back to menu'),
+C('5','Status'),IN('Type the report number and the new status'),
+D('Does that report exist?','Yes','No','Print “No report with that number.”'),
+D('Is the status Pending, Verified, Resolved or Rejected?','Yes','No','Print “That is not a valid status.”'),
+P('Change it and save reports.txt'),OUT('Print “Report #n is now …”'),C('K','Back to menu'),
+C('6','Route'),IN('Choose a start and a destination'),
+P('Run the same shortest-path search the app uses'),
+D('Was a route found?','Yes','No','Print “No route found.”'),
+OUT('Print the route, the distance in metres and the paths with steps'),C('K','Back to menu'),
+
+H('s8','Part 8','Building and testing','Getting from the source files to a running app.'),
+T('First-time setup','Start'),
+P('Install g++ with MSYS2 (UCRT64)'),
+P('Download httplib.h into the backend folder'),
+P('Run build.bat, or g++ -std=c++17 -O2 -Ibackend -o landas.exe backend/*.cpp -lws2_32 -pthread'),
+D('Did it build?','Yes','No','Print “Build failed”. Fix the error and build again'),
+OUT('Run landas.exe and open http://localhost:8080'),
+P('Run run_tests.bat. It builds tests.cpp with the backend files and needs no httplib.h'),
+P('The groups: map and routes, validation, files, users, Zara demo, history and undo, zones, security, robustness'),
+OUT('Print each check, then “N passed, M failed” (83 checks in all)'),
+D('Did every test pass?','Yes','No','Exit with a failure so you know to fix the code'),
+T('All green','End')
+];
+
+const arrow=l=>`<div class="ar">${l?`<b>${l}</b>`:''}</div>`;
+function node(x,v){
+ switch(x[0]){
+  case 't':return `<div class="n t"><em class="tag">${x[2]}</em>${x[1]}</div>`;
+  case 'p':return `<div class="n p"><em class="tag">Process</em>${x[1]}</div>`;
+  case 'i':return `<div class="n io"><span><em class="tag">${x[2]}</em>${x[1]}</span></div>`;
+  case 'c':return `<div class="cw"><i class="c">${x[1]}</i>${x[2]?`<small>${x[2]}</small>`:''}</div>`;
+  case 'h':return `<header class="sec" id="${x[3]}"><span class="kick">${x[1]}</span><h2>${x[2]}</h2><p>${x[4]}</p></header>`;
+  case 'd':{const s=x[3]?`<div class="side"><div class="h"><b>${x[3]}</b></div><div class="sb"><div class="n p br"><em class="tag">Process</em>${x[4]}</div>${x[5]?node(['c',x[5]]):'<em class="rj">↩ joins back in</em>'}</div></div>`:'';
+   return `<div class="dec${v?' v':''}"><div class="d"><span><em class="tag">If ›</em>${x[1]}</span></div>${s}</div>`}
+  case 'm':return `<div class="dec"><div class="d"><span><em class="tag">If ›</em>${x[1]}</span></div></div>${arrow('')}<div class="outs">${x[2].map(o=>node(['c',o[0],o[1]])).join('')}</div>`;
+  case 's':return `<div class="dec"><div class="d"><span><em class="tag">If ›</em>${x[1]}</span></div></div>${arrow('')}<div class="lanes"><div class="lane"><span class="lt">${x[2]}</span>${flow(x[3],true)}</div><div class="lane"><span class="lt">${x[4]}</span>${flow(x[5],true)}</div></div>`;
+ }
+}
+function flow(L,v){
+ return L.map((x,i)=>{
+  const n=L[i+1],end=!n||n[0]==='h'||x[0]==='h'||x[0]==='m'||x[0]==='s';
+  return node(x,v)+(end?'':arrow(x[0]==='d'?x[2]:''));
+ }).join('');
+}
+const legend=`<div class="legend" aria-label="Shape key"><div><span class="n t">Start / End</span>Start or end</div><div><span class="n p">Step</span>Something happens</div><div><span class="n io"><span>In / Out</span></span>Show or type</div><div><span class="d"><span>Question?</span></span>Yes or no</div><div><i class="c">A</i>Jump to a matching letter</div></div>`;
+document.getElementById('chart').innerHTML=
+ `<h1 class="ttl" id="s0">Landas Flowchart</h1>`+flow(FLOW);
+</script>
+</body>
+</html>
